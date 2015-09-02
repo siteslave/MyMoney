@@ -2,7 +2,7 @@
 angular.module('app.controllers.DashController', [
   'app.services.DashService'
 ])
-  .controller('DashController', function ($scope, DashService, $ionicPlatform, $cordovaSQLite) {
+  .controller('DashController', function ($scope, DashService) {
 
     $scope.incomesGroups = [];
 
