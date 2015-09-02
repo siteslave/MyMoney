@@ -7,7 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
   'ionic',
-  'ngCordova'
+  'ngCordova',
+  'app.controllers.DashController'
 ])
 
 .run(function($ionicPlatform, $cordovaSQLite) {
@@ -62,21 +63,20 @@ angular.module('starter', [
   // Each tab has its own nav history stack:
 
   .state('tab.dash', {
-    url: '/dash',
+    url: '/dash', // #/tab/dash
     views: {
       'tab-dash': {
         templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+        controller: 'DashController'
       }
     }
   })
 
   .state('tab.chats', {
-      url: '/chats',
+      url: '/chats', // #/tab/charts
       views: {
         'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+          templateUrl: 'templates/tab-chats.html'
         }
       }
     })
@@ -84,8 +84,7 @@ angular.module('starter', [
       url: '/chats/:chatId',
       views: {
         'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+          templateUrl: 'templates/chat-detail.html'
         }
       }
     })
@@ -94,8 +93,7 @@ angular.module('starter', [
     url: '/account',
     views: {
       'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+        templateUrl: 'templates/tab-account.html'
       }
     }
   });
