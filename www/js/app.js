@@ -5,10 +5,31 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', [
+  'ionic',
+  'ngCordova'
+])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaSQLite) {
   $ionicPlatform.ready(function() {
+
+    window.db = $cordovaSQLite.openDB({ name: 'myMoney.db'});
+
+    window.db.transaction(function (tx) {
+      var sqlCreateIncomeGroup = 'CREATE TABLE IF NOT EXISTS income_group (id integer primary key, name text)';
+
+      var sqlInsert1 = 'INSERT INTO income_group(name) VALUES("ค่าอาหาร")';
+      var sqlInsert2 = 'INSERT INTO income_group(name) VALUES("ค่าน้ำ")';
+      var sqlInsert3 = 'INSERT INTO income_group(name) VALUES("ค่ารถ")';
+
+      tx.executeSql(sqlCreateIncomeGroup);
+
+      tx.executeSql(sqlInsert1);
+      tx.executeSql(sqlInsert2);
+      tx.executeSql(sqlInsert3);
+
+    });
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
