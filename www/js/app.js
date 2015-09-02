@@ -14,23 +14,6 @@ angular.module('starter', [
 .run(function($ionicPlatform, $cordovaSQLite) {
   $ionicPlatform.ready(function() {
 
-    window.db = $cordovaSQLite.openDB({ name: 'myMoney.db'});
-
-    window.db.transaction(function (tx) {
-      var sqlCreateIncomeGroup = 'CREATE TABLE IF NOT EXISTS income_group (id integer primary key, name text)';
-
-      var sqlInsert1 = 'INSERT INTO income_group(name) VALUES("ค่าอาหาร")';
-      var sqlInsert2 = 'INSERT INTO income_group(name) VALUES("ค่าน้ำ")';
-      var sqlInsert3 = 'INSERT INTO income_group(name) VALUES("ค่ารถ")';
-
-      tx.executeSql(sqlCreateIncomeGroup);
-
-      tx.executeSql(sqlInsert1);
-      tx.executeSql(sqlInsert2);
-      tx.executeSql(sqlInsert3);
-
-    });
-
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -42,6 +25,27 @@ angular.module('starter', [
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
+
+    window.db = $cordovaSQLite.openDB({ name: 'myMoney.db'});
+
+    $ionicPlatform.ready(function () {
+      window.db.transaction(function (tx) {
+        var sqlCreateIncomeGroup = 'CREATE TABLE IF NOT EXISTS income_group (id integer primary key, name text)';
+        var sqlDeleteIncomeGroup = 'DELETE FROM income_group';
+        var sqlInsert1 = 'INSERT INTO income_group(name) VALUES("ค่าอาหาร")';
+        var sqlInsert2 = 'INSERT INTO income_group(name) VALUES("ค่าน้ำ")';
+        var sqlInsert3 = 'INSERT INTO income_group(name) VALUES("ค่ารถ")';
+
+        tx.executeSql(sqlCreateIncomeGroup);
+
+        tx.executeSql(sqlDeleteIncomeGroup);
+        tx.executeSql(sqlInsert1);
+        tx.executeSql(sqlInsert2);
+        tx.executeSql(sqlInsert3);
+
+      });
+    });
+
   });
 })
 
@@ -71,6 +75,19 @@ angular.module('starter', [
       }
     }
   })
+    .state('tab.loading', {
+      url: '/loading',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-loading.html',
+          controller: function ($timeout, $state) {
+            $timeout(function () {
+              $state.go('tab.dash');
+            }, 2000);
+          }
+        }
+      }
+    })
 
   .state('tab.chats', {
       url: '/chats', // #/tab/charts
@@ -99,6 +116,6 @@ angular.module('starter', [
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/loading');
 
 });
