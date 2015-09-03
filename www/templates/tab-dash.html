@@ -1,8 +1,8 @@
 <ion-view view-title="Dashboard">
-  <ion-content class="padding">
+  <ion-content>
     <div class="list card">
-      <div class="item item-divider">หมวดหมู่ค่าใช้จ่าย</div>
-      <a href="#" class="item" ng-repeat="i in incomesGroups">
+      <div class="item item-divider">หมวดหมู่รายได้</div>
+      <a href="#/tab/income/{{i.id}}" class="item" ng-repeat="i in incomesGroups">
         {{ i.name }}
       </a>
     </div>
