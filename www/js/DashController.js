@@ -73,4 +73,27 @@ angular.module('app.controllers.DashController', [
 
     });
 
+    // Test express service
+
+    $scope.getAjax = function () {
+      DashService.getAjax()
+        .then(function (res) {
+          //alert(JSON.stringify(data));
+
+          $scope.fruitLabels = res.data.labels;
+          $scope.fruitSeries = res.data.series;
+          $scope.fruitData = res.data.data;
+
+        }, function (err) {
+          console.log(JSON.stringify(err));
+        })
+    };
+    //$scope.fruitLabels = ['ม.ค', 'ก.พ', 'มี.ค'];
+    //$scope.fruitSeries = ['รับมา', 'รายไป'];
+    //
+    //$scope.fruitData = [
+    //  [65, 59, 80],
+    //  [28, 48, 40]
+    //];
+
   });

@@ -60,4 +60,7 @@ angular.module('starter.controllers.IncomeController', [])
 
     $scope.getAll($scope.data.incomeGroupId);
 
+
+
+
   });

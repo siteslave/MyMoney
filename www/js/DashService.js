@@ -1,8 +1,24 @@
 
 angular.module('app.services.DashService', [])
-  .factory('DashService', function ($q, $cordovaSQLite) {
+  .factory('DashService', function ($q, $http, $cordovaSQLite) {
 
     return {
+
+      getAjax: function () {
+        var q = $q.defer();
+
+        $http({url: 'http://localhost:3000/fruits'})
+          .success(function (data) {
+            q.resolve(data);
+          })
+          .error(function (err) {
+            q.reject(err);
+          });
+
+        return q.promise;
+
+      },
+
       getIncomeGroup: function () {
 
         var q = $q.defer();
