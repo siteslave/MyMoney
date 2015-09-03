@@ -1,5 +1,40 @@
 <ion-view view-title="รายรับ">
   <ion-content class="padding">
-    รายรับ
+    <div class="list">
+      <div class="item item-divider">ข้อมูลรายได้</div>
+
+      <div class="item item-input">
+        <span class="input-label">รายการ</span>
+        <input type="text" ng-model="$parent.data.desc">
+      </div>
+
+      <div class="item item-input">
+        <span class="input-label">จำนวนเงิน</span>
+        <input type="number" ng-model="$parent.data.price">
+      </div>
+
+      <div class="item item-input">
+        <span class="input-label">วันที่</span>
+        <input type="date" ng-model="$parent.data.date">
+      </div>
+
+      <div class="item">
+        <button class="button button-positive" ng-click="save()">บันทึก</button>
+        <button class="button button-assertive" ng-click="goBack()">หน้าหลัก</button>
+      </div>
+
+
+    </div>
+
+    <div class="list">
+      <div class="item item-divider">รายการ</div>
+      <a class="item item-icon-left" href="#" ng-repeat="i in items">
+        <i class="icon ion-person-stalker"></i>
+        {{ i.desc }}
+        <span class="badge badge-assertive">{{ i.price | number}}</span>
+      </a>
+
+    </div>
+
   </ion-content>
 </ion-view>

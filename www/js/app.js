@@ -2,7 +2,9 @@
 angular.module('starter', [
   'ionic',
   'ngCordova',
-  'app.controllers.DashController'
+  'app.controllers.DashController',
+  'starter.controllers.IncomeController',
+  'starter.services.IncomeService'
 ])
 
 .run(function($ionicPlatform, $cordovaSQLite) {
@@ -84,7 +86,8 @@ angular.module('starter', [
       url: '/income/:id',
       views: {
         'tab-dash': {
-          templateUrl: 'templates/income.html'
+          templateUrl: 'templates/income.html',
+          controller: 'IncomeController'
         }
       }
     });
