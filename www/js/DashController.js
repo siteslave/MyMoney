@@ -2,7 +2,7 @@
 angular.module('app.controllers.DashController', [
   'app.services.DashService'
 ])
-  .controller('DashController', function ($scope, DashService, $timeout, $ionicLoading) {
+  .controller('DashController', function ($scope, $ionicPlatform, DashService, $timeout, $ionicLoading) {
 
     $scope.incomesGroups = [];
 
@@ -11,8 +11,7 @@ angular.module('app.controllers.DashController', [
       showBackdrop: false
     });
 
-    $timeout(function () {
-      // Initial database
+    $ionicPlatform.ready(function () {
       DashService.getIncomeGroup()
         .then(function (res) {
 
@@ -32,7 +31,6 @@ angular.module('app.controllers.DashController', [
           console.log(err);
           $ionicLoading.hide();
         });
-    }, 100);
-
+    });
 
   });
