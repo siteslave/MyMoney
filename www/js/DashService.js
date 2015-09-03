@@ -21,6 +21,7 @@ angular.module('app.services.DashService', [])
       },
 
       getChartData: function () {
+
         var q = $q.defer();
 
         var sql = 'SELECT g.name, SUM(i.price) AS total FROM incomes AS i ' +
@@ -35,6 +36,7 @@ angular.module('app.services.DashService', [])
           });
 
         return q.promise;
+
       }
     }
 

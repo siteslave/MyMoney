@@ -12,10 +12,11 @@ angular.module('app.controllers.DashController', [
     });
 
     $ionicPlatform.ready(function () {
+
       DashService.getIncomeGroup()
         .then(function (res) {
 
-          for(var i = 0; i <= res.rows.length - 1; i++) {
+          for (var i = 0; i <= res.rows.length - 1; i++) {
             var obj = {};
             obj.id = res.rows.item(i).id;
             obj.name = res.rows.item(i).name;
@@ -29,34 +30,41 @@ angular.module('app.controllers.DashController', [
 
         })
         .then(function (res) {
-          //console.log(JSON.stringify(res.rows.item(0)));
-          $scope.labels = [];
-          $scope.data = [];
 
-          for(var i = 0; i <= res.rows.length - 1; i++) {
-            $scope.labels.push(res.rows.item(i).name);
+          $scope.data = [];
+          $scope.labels = [];
+
+          for (var i = 0; i <= res.rows.length - 1; i++) {
+
             $scope.data.push(res.rows.item(i).total);
-            console.log(JSON.stringify(res.rows.item(i)));
+            $scope.labels.push(res.rows.item(i).name);
+
           }
+
           $ionicLoading.hide();
+
         }, function (err) {
           $ionicLoading.hide();
           console.log(JSON.stringify(err));
         });
 
+      // View event
       $scope.$on('$ionicView.afterEnter', function(){
         DashService.getChartData()
           .then(function (res) {
-            //console.log(JSON.stringify(res.rows.item(0)));
-            $scope.labels = [];
-            $scope.data = [];
 
-            for(var i = 0; i <= res.rows.length - 1; i++) {
-              $scope.labels.push(res.rows.item(i).name);
+            $scope.data = [];
+            $scope.labels = [];
+
+            for (var i = 0; i <= res.rows.length - 1; i++) {
+
               $scope.data.push(res.rows.item(i).total);
-              console.log(JSON.stringify(res.rows.item(i)));
+              $scope.labels.push(res.rows.item(i).name);
+
             }
+
             $ionicLoading.hide();
+
           }, function (err) {
             $ionicLoading.hide();
             console.log(JSON.stringify(err));

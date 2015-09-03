@@ -20,8 +20,13 @@ angular.module('starter.controllers.IncomeController', [])
             desc: $scope.data.desc,
             price: $scope.data.price
           });
-          //console.log(JSON.stringify(res));
-          //$scope.getAll();
+
+          $scope.data.desc = null;
+          $scope.data.price = 0;
+          $scope.data.date = new Date();
+
+          $state.go('tab.dash');
+
         }, function (err) {
           alert(JSON.stringify(err));
         });
@@ -30,9 +35,9 @@ angular.module('starter.controllers.IncomeController', [])
 
     $scope.items = [];
 
-    $scope.getAll = function () {
+    $scope.getAll = function (id) {
       $scope.items = [];
-      IncomeService.getAll()
+      IncomeService.getAll(id)
         .then(function (res) {
 
           for(var i = 0; i <= res.rows.length - 1; i++) {
@@ -53,6 +58,6 @@ angular.module('starter.controllers.IncomeController', [])
       $state.go('tab.dash');
     };
 
-    $scope.getAll();
+    $scope.getAll($scope.data.incomeGroupId);
 
   });

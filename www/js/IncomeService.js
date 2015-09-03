@@ -27,13 +27,13 @@ angular.module('starter.services.IncomeService', [])
 
       },
 
-      getAll: function () {
+      getAll: function (id) {
 
         var q = $q.defer();
 
-        var sql = 'SELECT * FROM incomes';
+        var sql = 'SELECT * FROM incomes WHERE income_group_id=?';
 
-        $cordovaSQLite.execute(window.db, sql, [])
+        $cordovaSQLite.execute(window.db, sql, [id])
           .then(function (res) {
             q.resolve(res);
           }, function (err) {
