@@ -4,6 +4,7 @@ angular.module('starter.controllers.IncomeController', [])
                                             $stateParams, IncomeService) {
 
     $scope.data = {};
+    $scope.data.date = new Date();
 
     $scope.data.incomeGroupId = $stateParams.id;
 

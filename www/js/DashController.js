@@ -25,12 +25,44 @@ angular.module('app.controllers.DashController', [
             //console.log(JSON.stringify(res.rows.item(0)));
           }
 
-          $ionicLoading.hide();
+          return DashService.getChartData();
 
-        }, function (err) {
-          console.log(err);
+        })
+        .then(function (res) {
+          //console.log(JSON.stringify(res.rows.item(0)));
+          $scope.labels = [];
+          $scope.data = [];
+
+          for(var i = 0; i <= res.rows.length - 1; i++) {
+            $scope.labels.push(res.rows.item(i).name);
+            $scope.data.push(res.rows.item(i).total);
+            console.log(JSON.stringify(res.rows.item(i)));
+          }
           $ionicLoading.hide();
+        }, function (err) {
+          $ionicLoading.hide();
+          console.log(JSON.stringify(err));
         });
+
+      $scope.$on('$ionicView.afterEnter', function(){
+        DashService.getChartData()
+          .then(function (res) {
+            //console.log(JSON.stringify(res.rows.item(0)));
+            $scope.labels = [];
+            $scope.data = [];
+
+            for(var i = 0; i <= res.rows.length - 1; i++) {
+              $scope.labels.push(res.rows.item(i).name);
+              $scope.data.push(res.rows.item(i).total);
+              console.log(JSON.stringify(res.rows.item(i)));
+            }
+            $ionicLoading.hide();
+          }, function (err) {
+            $ionicLoading.hide();
+            console.log(JSON.stringify(err));
+          });
+      });
+
     });
 
   });

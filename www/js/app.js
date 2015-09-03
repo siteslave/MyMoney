@@ -4,7 +4,8 @@ angular.module('starter', [
   'ngCordova',
   'app.controllers.DashController',
   'starter.controllers.IncomeController',
-  'starter.services.IncomeService'
+  'starter.services.IncomeService',
+  'chart.js'
 ])
 
 .run(function($ionicPlatform, $cordovaSQLite) {
